@@ -1,7 +1,7 @@
 # Учебный проект «Код и Магия» [![Build status][travis-image]][travis-url]
 
 * Студент: [Владимир Степанян](https://up.htmlacademy.ru/javascript/21/user/1483189).
-* Наставник: `Дмитрий Гуляев`.
+* Наставник: [Дмитрий Гуляев](https://htmlacademy.ru/profile/dima).
 
 ---
 
