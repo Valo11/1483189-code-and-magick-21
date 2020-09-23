@@ -7,6 +7,7 @@ var FONT_GAP = 15;
 var TEXT_WIDTH = 50;
 var BAR_HEIGHT = 40;
 var barWidth = CLOUD_WIDTH - GAP - TEXT_WIDTH - GAP;
+var MAX_HEIGHT = 150;
 
 var renderCloud = function(ctx, x, y, color) {
   ctx.fillStyle = color;
@@ -46,14 +47,15 @@ window.renderStatistics = function(ctx, players, times) {
   console.log(times);
 
   var maxTime = getMaxElement(times);
+  var  onePoint = MAX_HEIGHT / maxTime;
 
   for (var i = 0; i < players.length; i++) {
     if (players[i] == 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
-      ctx.fillStyle = '#4169e1';
+      ctx.fillStyle = 'rgba(44,' + (130 + i * 30) + ', 201, 1)';
     }
-    ctx.fillRect (140 + i * 100, 250, BAR_HEIGHT, -times[i] / 55);
+    ctx.fillRect (140 + i * 100, 250, BAR_HEIGHT, -times[i] * onePoint);
 
     ctx.fillStyle = '#000';
     ctx.fillText(
@@ -64,7 +66,7 @@ window.renderStatistics = function(ctx, players, times) {
     ctx.fillText(
       Math.round(times[i]),
       140 + i * 100,
-      times[i] / 30
+      230 - times[i] * onePoint
     )
   }
 };
