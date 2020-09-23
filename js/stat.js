@@ -21,7 +21,6 @@ var getMaxElement = function(arr) {
       maxElement = arr[i];
     }
   }
-
   return maxElement;
 };
 
@@ -46,8 +45,6 @@ window.renderStatistics = function(ctx, players, times) {
   console.log(players);
   console.log(times);
 
-
-
   var maxTime = getMaxElement(times);
 
   for (var i = 0; i < players.length; i++) {
@@ -61,7 +58,7 @@ window.renderStatistics = function(ctx, players, times) {
     ctx.fillStyle = '#000';
     ctx.fillText(
       players[i],
-      CLOUD_X + (GAP * 4) +   ((FONT_GAP * 4) + BAR_HEIGHT) * i,
+      CLOUD_X + (GAP * 4) + (FONT_GAP * 4 + BAR_HEIGHT) * i,
       CLOUD_Y + (GAP * 25)
     );
     ctx.fillText(
@@ -70,5 +67,4 @@ window.renderStatistics = function(ctx, players, times) {
       times[i] / 30
     )
   }
-
 };
