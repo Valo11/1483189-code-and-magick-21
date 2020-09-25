@@ -12,8 +12,8 @@ var GAP_POST = 140;
 var GAP_BETWEEN_POST = 100;
 var GAP_NAME_X = 4;
 var GAP_NAME_Y = 25;
-var GAP_BUTTON_POST = 250;
-var GAP_BUTTON_TEXT = 230;
+var GAP_BUTTOM_POST = 250;
+var GAP_BUTTOM_TEXT = 230;
 
 
 var renderCloud = function (ctx, x, y, color) {
@@ -32,6 +32,24 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
+function getRedColor() {
+  return 'rgba(240, 52, 52, 1)';
+}
+
+function getRandanColor(i) {
+  return 'rgba(44,' + (130 + i * 30) + ', 201, 1)';
+}
+
+function colorRectangle(ctx, height, width, axisX, axisY, color) {
+  ctx.fillStyle = color;
+  ctx.fillRect(height, width, axisX, axisY);
+}
+
+function drawingTextByCoordinates(text, axisX, axisY, ctx, color) {
+  ctx.fillStyle = color;
+  ctx.fillText(text, axisX, axisY);
+}
+
 window.renderStatistics = function (ctx, players, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
@@ -46,16 +64,14 @@ window.renderStatistics = function (ctx, players, times) {
 
   for (var i = 0; i < players.length; i++) {
     if (players[i] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+      var color = getRedColor();
     } else {
-      ctx.fillStyle = 'rgba(44,' + (130 + i * 30) + ', 201, 1)';
+      color = getRandanColor(i);
     }
     var sumMax = times[i] * onePoint;
 
-    ctx.fillRect(GAP_POST + i * GAP_BETWEEN_POST, GAP_BUTTON_POST, BAR_HEIGHT, -sumMax);
-
-    ctx.fillStyle = '#000';
-    ctx.fillText(players[i], CLOUD_X + (GAP * GAP_NAME_X) + (FONT_GAP * GAP_NAME_X + BAR_HEIGHT) * i, CLOUD_Y + (GAP * GAP_NAME_Y));
-    ctx.fillText(Math.round(times[i]), GAP_POST + i * GAP_BETWEEN_POST, GAP_BUTTON_TEXT - sumMax);
+    colorRectangle(ctx, GAP_POST + i * GAP_BETWEEN_POST, GAP_BUTTOM_POST, BAR_HEIGHT, -sumMax, color);
+    drawingTextByCoordinates(players[i], CLOUD_X + (GAP * GAP_NAME_X) + (FONT_GAP * GAP_NAME_X + BAR_HEIGHT) * i, CLOUD_Y + (GAP * GAP_NAME_Y), ctx, '#000');
+    drawingTextByCoordinates(Math.round(times[i]), GAP_POST + i * GAP_BETWEEN_POST, GAP_BUTTOM_TEXT - sumMax, ctx, '#000');
   }
 };
